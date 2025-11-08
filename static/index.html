@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extração de Históricos UFOPA - Web</title>
+    
+    <link rel="stylesheet" href="/static/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>Configuração da Extração de Históricos</h1>
+
+            <div class="input-group-upload">
+                <label for="pdfFiles">1. Selecione os arquivos PDF:</label>
+                <input type="file" id="pdfFiles" accept=".pdf" multiple>
+            </div>
+
+            <div class="input-group-upload">
+                <label for="excelFile">2. Selecione o arquivo Excel de Percentuais (.xls):</label>
+                <input type="file" id="excelFile" accept=".xls, application/vnd.ms-excel">
+            </div>
+
+            <button class="primary-button" id="extractButton" onclick="startExtraction()">Iniciar Extração</button>
+
+            <div class="messages-area">
+                <label for="messages">Mensagens:</label>
+                <textarea id="messages" rows="5" readonly placeholder="Aguardando o upload dos arquivos..."></textarea>
+            </div>
+
+            <div id="resultsArea" class="results-area" style="display: none;">
+                <h3>Relatórios Gerados:</h3>
+                <div id="downloadLinks"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+    
+</body>
+</html>
