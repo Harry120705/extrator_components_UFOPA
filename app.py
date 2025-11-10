@@ -10,7 +10,7 @@ from seu_script_de_extracao import run_extraction_process_web_mode
 # --- Configuração ---
 UPLOAD_FOLDER = 'uploads'
 GENERATED_REPORTS_FOLDER = 'generated_reports'
-ALLOWED_EXTENSIONS = {'pdf', 'xls'}
+ALLOWED_EXTENSIONS = {'pdf', 'xls', 'xlsx'}
 
 app = Flask(__name__, static_folder='static')
 CORS(app) # Habilita CORS para a aplicação
