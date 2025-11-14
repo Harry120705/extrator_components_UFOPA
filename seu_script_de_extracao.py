@@ -219,11 +219,12 @@ def carregar_percentuais(arquivo_xls):
 # --- FUNÇÃO PRINCIPAL ADAPTADA ---
 # Esta é a função que o app.py irá chamar.
 
-def run_extraction_process_web_mode(pdf_upload_folder, excel_percentual_path, output_report_folder):
+def run_extraction_process_web_mode(pdf_upload_folder, excel_percentual_path, output_report_folder, progress_callback=None):
     """
     Executa o processo de extração principal.
     Recebe os caminhos das pastas (do servidor) e gera os relatórios.
     Retorna um dicionário com os nomes dos arquivos gerados.
+    progress_callback: função opcional que recebe (current, total) para reportar progresso
     """
     
     # 1. Carrega percentuais (usando o caminho do arquivo enviado)
@@ -270,6 +271,11 @@ def run_extraction_process_web_mode(pdf_upload_folder, excel_percentual_path, ou
 
         for i, arquivo in enumerate(pdfs_encontrados):
             print(f"Processando [{i+1}/{len(pdfs_encontrados)}]: {arquivo}")
+            
+            # Reporta progresso se callback fornecido
+            if progress_callback:
+                progress_callback(i + 1, len(pdfs_encontrados))
+            
             caminho_completo = os.path.join(pdf_upload_folder, arquivo)
             
             # --- Extrai os dados do PDF ---

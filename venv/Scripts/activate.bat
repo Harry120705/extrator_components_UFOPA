@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\User\Documents\Organização de planilhas\Extração_de_disciplinas_pendentes\Históricos\extrator-historicos-ufopa\venv
+set VIRTUAL_ENV=C:\xampp\htdocs\extrator_componentes\extrator-historicos-ufopa\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
