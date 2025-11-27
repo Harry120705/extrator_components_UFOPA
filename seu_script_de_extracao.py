@@ -167,7 +167,15 @@ def extrair_nome_aluno(caminho_pdf):
 def carregar_percentuais(arquivo_xls):
     percentuais = {}
     try:
+        # Se nenhum arquivo fornecido, retorna dicionário vazio
+        if not arquivo_xls:
+            return percentuais
+
         # Suporta .xls (xlrd) e .xlsx (openpyxl). Detecta pela extensão do arquivo.
+        if not os.path.exists(arquivo_xls):
+            print(f"   Aviso: arquivo de percentuais não encontrado: {arquivo_xls}")
+            return percentuais
+
         _, ext = os.path.splitext(arquivo_xls)
         ext = ext.lower()
 
@@ -227,10 +235,14 @@ def run_extraction_process_web_mode(pdf_upload_folder, excel_percentual_path, ou
     progress_callback: função opcional que recebe (current, total) para reportar progresso
     """
     
-    # 1. Carrega percentuais (usando o caminho do arquivo enviado)
-    print(f"Carregando percentuais de '{excel_percentual_path}'...")
-    percentuais_dict = carregar_percentuais(excel_percentual_path)
-    print(f"   → {len(percentuais_dict)} percentuais carregados.\n")
+    # 1. Carrega percentuais (se informado)
+    if excel_percentual_path:
+        print(f"Carregando percentuais de '{excel_percentual_path}'...")
+        percentuais_dict = carregar_percentuais(excel_percentual_path)
+        print(f"   → {len(percentuais_dict)} percentuais carregados.\n")
+    else:
+        print("Nenhum arquivo de percentuais fornecido — extração seguirá sem percentuais.")
+        percentuais_dict = {}
     
     # 2. Lista os PDFs (da pasta de upload)
     pdfs_encontrados = sorted([f for f in os.listdir(pdf_upload_folder) if f.lower().endswith(".pdf")])
